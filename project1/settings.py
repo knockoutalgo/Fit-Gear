@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-@13i7byarlqyuveh=6g^t#-ptf%wotta%w&=%u%(5@zvl3+v#(
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://fit-gear-production.up.railway.app"
+]
 
 
 # Application definition
