@@ -84,6 +84,7 @@ def register(request):
 def shop(request):
     q = request.GET.get("q", "")
     thing = Thing.objects.all()
+    print("Thing count in web:", thing.count())
     if q:
         thing = thing.filter(
             Q(title__icontains=q) | 
