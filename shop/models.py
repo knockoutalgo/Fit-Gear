@@ -11,16 +11,16 @@ class Thing(models.Model):
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     image_url = models.URLField(blank=True, null=True)
 
-   def save(self, *args, **kwargs):
-    if self.image_url and not self.image:
-        try:
-            image_content = requests.get(self.image_url, timeout=5).content
-            file_name = self.image_url.split("/")[-1]
-            self.image.save(file_name, ContentFile(image_content), save=False)
-        except Exception:
-            pass  # skip image download if it fails
-    super().save(*args, **kwargs)
-
+    def save(self, *args, **kwargs):
+        if self.image_url and not self.image:
+            try:
+                image_content = requests.get(self.image_url, timeout=5).content
+                file_name = self.image_url.split("/")[-1]
+                self.image.save(file_name, ContentFile(image_content), save=False)
+            except Exception:
+                pass
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.name
     
