@@ -46,3 +46,15 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = ("thing", "user")
+
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    thing = models.ForeignKey(Thing, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    total_price = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = ("thing", "user")
+    
+    def __str__(self):
+        return self.user.username 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ request.user }}</h1>
+    {% for item in cart_items %}
+        <div class="scroll">
+            <div class="artifact">
+                <h4>{{item.thing}} -- {{item.quantity}} <b> ( This Product Price is -- {{item.total_price}} )</b></h4>
+                
+            </div>
+        </div>
+    {% endfor %}
+    <h1>Total is {{ total_price }}</h1>
+</body>
+</html>

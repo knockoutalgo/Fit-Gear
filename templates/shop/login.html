@@ -44,15 +44,15 @@
             <a href="{% url 'shop:register' %}"><button class="btn btn-darkfantasy w-100">Register Here</button></a>
 
 
-    <form method="POST">
+    <form method="POST" autocomplete="off">
         {% csrf_token %}
 
         <label>Agent Name</label>
-        <input type="text" name="username" class="form-control mb-3"
+        <input type="text" name="username" class="form-control mb-3" placeholder="agentname" autocomplete="off"
             style="background:#29241f;color:#e8d9b8;border:1px solid #4d4639;" required>
 
         <label>Secret Code</label>
-        <input type="password" name="password" class="form-control mb-3"
+        <input type="password" name="password" class="form-control mb-3" palceholder="agentkeys" autocomplete="off"
             style="background:#29241f;color:#e8d9b8;border:1px solid #4d4639;" required>
 
         <button class="btn btn-darkfantasy w-100">Enter</button>

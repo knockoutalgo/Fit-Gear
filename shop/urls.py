@@ -15,5 +15,7 @@ urlpatterns=[
     path('update/<int:pk>/',views.update,name='update'),
     path("thing/<int:pk>/like/", views.vote_thing, {"value": 1}, name="thing_like"),
     path("thing/<int:pk>/dislike/", views.vote_thing, {"value": -1}, name="thing_dislike"),
+    path('cart/',views.view_cart,name='cart'),
+    path('cart/<int:pk>',views.addtocart,name='add_cart'),
 
 ]

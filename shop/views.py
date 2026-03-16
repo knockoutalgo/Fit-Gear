@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Thing,Comment,Vote
+from urllib3 import request
+from .models import Thing,Comment,Vote,CartItem
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from .forms import ThingForm,CommentForm
@@ -12,13 +13,13 @@ from django.views.decorators.http import require_POST
 from django.db.models import Q
 from django.db.models import Count
 
-
-
 # Create your views here.
 
 def mylogout(request):
-    logout(request)
-    return redirect('shop:login')
+    if request.method=='POST':
+        logout(request)
+        return redirect('shop:login')
+    return render(request,'shop/logout.html')
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -89,9 +90,8 @@ def shop(request):
             Q(body__icontains=q)
         ).distinct()
     return render(request,'shop/base.html',{'samaan':thing, "q": q})
+
 @login_required(login_url='shop:login')
-
-
 def read(request, pk):
     thing = get_object_or_404(Thing, pk=pk)
 
@@ -109,7 +109,6 @@ def read(request, pk):
             return redirect("shop:read", pk=thing.pk)
     else:
         form = CommentForm()
-
     return render(
         request,
         "shop/read.html",
@@ -122,23 +121,22 @@ def read(request, pk):
         },
     )
 
-
 @login_required(login_url='shop:login')
 def delete(request, pk):
-    thing = get_object_or_404(Thing, pk=pk)
+    thing=get_object_or_404(Thing,pk=pk)
 
-    # Check permission
     if thing.user != request.user:
+        print("holla")
         messages.error(request, "You are not allowed to delete this item.")
         return redirect('shop:shoppy')   # redirect to home
 
     if request.method == "POST":
+        print("ko")
         thing.delete()
         messages.success(request, "Item deleted successfully.")
         return redirect('shop:shoppy')
 
-    return render(request, 'shop/read.html', {'perti': thing})
-
+    return render(request, 'shop/delete.html', {'perti': thing})
 
 @login_required(login_url='shop:login')
 def create(request):
@@ -186,3 +184,25 @@ def vote_thing(request, pk, value):
         vote.save()
 
     return redirect("shop:read", pk=thing.pk)
+
+@login_required(login_url='shop:login') 
+def view_cart(request):
+        print("hi")
+        cart_items=CartItem.objects.filter(user=request.user)
+        print(list(cart_items))
+        return render(request,'shop/cart.html',{'cart_items':cart_items})
+
+@login_required(login_url='shop:login')
+def addtocart(request, pk):
+     if request.method=='POST':
+        print("hello")
+        thing=get_object_or_404(Thing,pk=pk)
+        user=request.user
+        existing_cart_item = CartItem.objects.filter(thing=thing, user=user).first()
+        if existing_cart_item:
+            existing_cart_item.quantity += 1
+            existing_cart_item.total_price = existing_cart_item.quantity * thing.price
+            existing_cart_item.save()
+        else:
+            cart_items=CartItem.objects.create(thing=thing,user=user,total_price=thing.price)
+        return redirect('shop:shoppy')

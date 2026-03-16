@@ -57,7 +57,9 @@
     <div class="header">ACADEMY OF SHADOWS — ARTIFACT REGISTRY</div>
 
     <a href="{% url 'shop:create' %}" class="btn btn-darkfantasy mb-3">Add New Artifact</a>
-    <a href="{% url 'shop:logout' %}" class="btn btn-danger mb-3 ms-2">Exit</a>
+    <a href="{% url 'shop:logout' %}" class="btn btn-danger mb-3 ms-2">Logout</a>
+    <a href="{% url 'shop:cart' %}" class="btn btn-darkfantasy mb-3 ms-2">View Cart</a>
+
 <form method="get">
   <input type="text" name="q" placeholder="Search..." value="{{ q }}">
   <button type="submit">Search</button>
@@ -67,15 +69,22 @@
         <h3>{{ s.name }}</h3>
         <p style="color:#c4b59a;">Worth: ₹{{ s.price }}</p>
         <p style="color:#9e8c75;">{{ s.desc|truncatewords:12 }}</p>
-        <p style="color:#9e8c75;">{{ s.user }}</p>
+        <p style="color:#9e8c75;">Vendor Name: {{ s.user }}</p>
 
         <a href="{% url 'shop:read' s.id %}" class="btn btn-darkfantasy mt-2">Inspect</a>
         <a href="{% url 'shop:update' s.id %}" class="btn btn-warning ms-2 mt-2">Edit</a>
 
-        <form action="{% url 'shop:delete' s.id %}" method="post" style="display:inline;">
+        <form action="{% url 'shop:add_cart' s.id %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-darkfantasy mt-2" type="submit">Add to Cart</button>
+        </form>
+                
+        <!-- <form action="{% url 'shop:delete' s.id %}" method="GET" style="display:inline;">
             {% csrf_token %}
             <button class="btn btn-danger ms-2 mt-2">Destroy</button>
-        </form>
+        </form> -->
+        <a href="{% url 'shop:delete' s.id %}" class="btn btn-danger ms-2 mt-2">Destroy</a>
+
     </div>
     {% endfor %}
 </div>
