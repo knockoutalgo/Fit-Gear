@@ -2,4 +2,4 @@
 buildCommand = ""
 
 [deploy]
-startCommand = "python manage.py migrate && python manage.py createsuperuser --noinput && gunicorn project1.wsgi:application --bind 0.0.0.0:$PORT"
+startCommand = "python manage.py migrate && gunicorn project1.wsgi:application --bind 0.0.0.0:$PORT"
