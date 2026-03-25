@@ -17,5 +17,5 @@ urlpatterns=[
     path("thing/<int:pk>/dislike/", views.vote_thing, {"value": -1}, name="thing_dislike"),
     path('cart/',views.view_cart,name='cart'),
     path('cart/<int:pk>',views.addtocart,name='add_cart'),
-
+    path('/about',views.about,name='about'),
 ]

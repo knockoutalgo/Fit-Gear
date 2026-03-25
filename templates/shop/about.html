@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bismay Vibhor Behera — Codex</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg:       #0c0a09;
+        --surface:  #1a1613;
+        --border:   #4d3b2f;
+        --gold:     #d1b38c;
+        --gold-dim: #c4b59a;
+        --muted:    #9e8c75;
+        --glow:     #8e7359;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+        background: var(--bg);
+        color: #e8d9b8;
+        font-family: "IM Fell English", "Courier New", serif;
+        min-height: 100vh;
+        padding: 16px;
+    }
+
+    .codex {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: clamp(20px, 5vw, 40px);
+        background: radial-gradient(ellipse at top, #2b2420 0%, #0c0a09 80%);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 60px rgba(0,0,0,0.4);
+    }
+
+    /* ── Header ── */
+    .name {
+        font-family: "Cinzel", serif;
+        font-size: clamp(20px, 5vw, 34px);
+        color: var(--gold);
+        text-shadow: 0 0 12px var(--glow);
+        letter-spacing: clamp(1px, 2vw, 5px);
+        text-align: center;
+        margin-bottom: 4px;
+    }
+
+    .institute {
+        text-align: center;
+        color: var(--muted);
+        font-size: clamp(12px, 2.5vw, 15px);
+        letter-spacing: 2px;
+        margin-bottom: 6px;
+    }
+
+    .tagline {
+        text-align: center;
+        color: var(--gold-dim);
+        font-size: clamp(12px, 2vw, 14px);
+        font-style: italic;
+        margin-bottom: 0;
+    }
+
+    .divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        opacity: .5;
+        margin: 20px 0;
+    }
+
+    /* ── Section ── */
+    .section-title {
+        font-family: "Cinzel", serif;
+        font-size: clamp(13px, 3vw, 16px);
+        color: var(--gold);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    p { color: #c9baa0; font-size: clamp(13px, 2.5vw, 15px); line-height: 1.8; }
+
+    /* ── Skill badges ── */
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 6px;
+    }
+
+    .badge-dark {
+        background: #29231e;
+        border: 1px solid var(--border);
+        color: var(--gold-dim);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-family: "Courier New", monospace;
+        transition: border-color .2s, color .2s;
+    }
+    .badge-dark:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+    }
+
+    /* ── Links ── */
+    .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 8px;
+    }
+
+    .btn-darkfantasy {
+        background: #3c322a;
+        border: 1px solid #6b5a49;
+        color: #e8d9b8;
+        font-family: inherit;
+        font-size: 14px;
+        padding: 8px 18px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background .2s, border-color .2s, color .2s;
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .btn-darkfantasy:hover {
+        background: #4e4238;
+        border-color: var(--gold);
+        color: #fff;
+    }
+
+    @media (max-width: 480px) {
+        .btn-darkfantasy { width: 100%; justify-content: center; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="codex">
+
+    <!-- Header -->
+    <h1 class="name">BISMAY BIBHOR BEHERA</h1>
+    <p class="institute">⚔ IIT PATNA ⚔</p>
+    <p class="tagline">"Where algorithms meet the arcane."</p>
+
+    <hr class="divider">
+
+    <!-- About -->
+    <div class="section-title">§ The Scroll</div>
+    <p>
+        A student of the dark arts of Computer Science at IIT Patna — where logic
+        is forged in the depths of algorithms and conjured into living systems through
+        code. I walk the twin paths of <strong style="color:var(--gold);">algorithmic thinking</strong>
+        and <strong style="color:var(--gold);">full-stack development</strong>, building
+        things that are both fast and functional.
+    </p>
+    <p>
+        When not hunting down complexity bounds or debugging cursed edge cases,
+        I craft web applications that bridge the gap between raw logic and real-world use.
+        Currently sharpening blades in Django, Python, and the ancient scrolls of DSA.
+    </p>
+
+    <hr class="divider">
+
+    <!-- Interests -->
+    <div class="section-title">§ Domains of Power</div>
+    <div class="badges">
+        <span class="badge-dark">⚙ Algorithms & DSA</span>
+        <span class="badge-dark">🌐 Web Development</span>
+        <span class="badge-dark">🐍 Python</span>
+        <span class="badge-dark">🏛 Django</span>
+        <span class="badge-dark">🗄 Databases</span>
+        <span class="badge-dark">📐 Problem Solving</span>
+        <span class="badge-dark">🔗 REST APIs</span>
+        <span class="badge-dark">🖥 Backend Systems</span>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Currently -->
+    <div class="section-title">§ Current Quest</div>
+    <p>
+        Building and deploying full-stack Django applications — from authentication
+        systems and artifact registries to production deployments on Railway.
+        Always on the lookout for harder problems to solve and cleaner code to write.
+    </p>
+
+    <hr class="divider">
+
+    <!-- Contact -->
+    <div class="section-title">§ Summon Me</div>
+    <div class="contact-row">
+        <a href="https://github.com/knockoutalgo" class="btn-darkfantasy" target="_blank">⚡ GitHub</a>
+        <a href="https://www.linkedin.com/in/bismay-bibhor-behera-522149282/?skipRedirect=true" class="btn-darkfantasy" target="_blank">🔗 LinkedIn</a>
+        <a href="mailto:bismay200514@gmail.com" class="btn-darkfantasy">✉ Email</a>
+    </div>
+
+</div>
+
+</body>
+</html>

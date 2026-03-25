@@ -14,6 +14,8 @@ from django.db.models import Q
 from django.db.models import Count
 
 # Create your views here.
+def about(request):
+    return render(request,'shop/about.html')
 
 def mylogout(request):
     if request.method=='POST':
