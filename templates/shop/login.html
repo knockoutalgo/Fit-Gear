@@ -2,36 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Academy Gate — Authenticate</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
 
 <style>
+    :root {
+        --bg:        #0b0a0a;
+        --surface:   #1b1714;
+        --border:    #4c3d30;
+        --border-lt: #6b5a49;
+        --gold:      #d1b38c;
+        --muted:     #9e8c75;
+        --glow:      #8e7359;
+        --input-bg:  #29241f;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
-        background:#0b0a0a;
-        font-family:"Courier New", monospace;
-        color:#e8d9b8;
+        background: var(--bg);
+        font-family: "IM Fell English", "Courier New", serif;
+        color: #e8d9b8;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
     }
 
     .gate {
-        background:#1b1714;
-        border:2px solid #4c3d30;
-        width:400px;
-        margin:auto;
-        margin-top:80px;
-        padding:20px;
-        border-radius:10px;
-        box-shadow:0 0 35px rgba(0,0,0,0.6);
+        background: radial-gradient(ellipse at top, #2b2420 0%, #0c0a09 80%);
+        border: 1px solid var(--border);
+        width: 100%;
+        max-width: 420px;
+        padding: clamp(20px, 5vw, 36px);
+        border-radius: 10px;
+        box-shadow: 0 0 40px rgba(0,0,0,0.7), inset 0 0 40px rgba(0,0,0,0.3);
     }
 
+    .gate-title {
+        font-family: "Cinzel", serif;
+        font-size: clamp(16px, 4vw, 22px);
+        color: var(--gold);
+        text-shadow: 0 0 8px var(--glow);
+        text-align: center;
+        letter-spacing: 2px;
+        margin-bottom: 4px;
+    }
+
+    .gate-subtitle {
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    label {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .form-control {
+        background: var(--input-bg) !important;
+        color: #e8d9b8 !important;
+        border: 1px solid var(--border) !important;
+        font-family: inherit;
+        font-size: 15px;
+        min-height: 44px;
+        transition: border-color .2s;
+    }
+    .form-control:focus {
+        border-color: var(--gold) !important;
+        box-shadow: 0 0 0 2px rgba(209,179,140,.15) !important;
+        outline: none;
+    }
+    .form-control::placeholder { color: var(--muted) !important; }
+
     .btn-darkfantasy {
-        background:#3c322a;
-        border:1px solid #6b5a49;
-        color:#e8d9b8;
+        background: #3c322a;
+        border: 1px solid var(--border-lt);
+        color: #e8d9b8;
+        font-family: inherit;
+        min-height: 44px;
+        font-size: 15px;
+        transition: background .2s, color .2s, border-color .2s;
+        width: 100%;
     }
     .btn-darkfantasy:hover {
-        background:#4e4238;
-        color:white;
+        background: #4e4238;
+        color: #fff;
+        border-color: var(--gold);
+    }
+
+    .divider {
+        border-color: var(--border);
+        opacity: .4;
+        margin: 18px 0;
     }
 </style>
 </head>
@@ -39,29 +110,34 @@
 <body>
 
 <div class="gate">
-    <h3>Gatekeeper Authentication</h3>
-            <h5 >Don't Have Account ?? </h5>
-            <a href="{% url 'shop:register' %}"><button class="btn btn-darkfantasy w-100">Register Here</button></a>
-
+    <h3 class="gate-title">GATEKEEPER</h3>
+    <p class="gate-subtitle">Authenticate to enter the Academy</p>
 
     <form method="POST" autocomplete="off">
         {% csrf_token %}
 
         <label>Agent Name</label>
-        <input type="text" name="username" class="form-control mb-3" placeholder="agentname" autocomplete="off"
-            style="background:#29241f;color:#e8d9b8;border:1px solid #4d4639;" required>
+        <input type="text" name="username" class="form-control mb-3"
+               placeholder="agentname" autocomplete="off" required>
 
         <label>Secret Code</label>
-        <input type="password" name="password" class="form-control mb-3" palceholder="agentkeys" autocomplete="off"
-            style="background:#29241f;color:#e8d9b8;border:1px solid #4d4639;" required>
+        <input type="password" name="password" class="form-control mb-4"
+               placeholder="agentkeys" autocomplete="off" required>
 
-        <button class="btn btn-darkfantasy w-100">Enter</button>
-
+        <button type="submit" class="btn btn-darkfantasy">Enter</button>
     </form>
 
     {% for m in messages %}
-        <p class="text-danger mt-3">{{ m }}</p>
+        <p class="text-danger mt-3 mb-0" style="font-size:14px;">⚠ {{ m }}</p>
     {% endfor %}
+
+    <hr class="divider">
+
+    <p style="text-align:center; color:var(--muted); font-size:13px; margin-bottom:8px;">
+        No account yet?
+    </p>
+    <a href="{% url 'shop:register' %}" class="btn btn-darkfantasy"
+       style="border-style:dashed;">Register Here</a>
 </div>
 
 </body>
