@@ -2,92 +2,181 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Academy of Shadows — Artifact Registry</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        background: #0c0a09;
-        color: #e8d9b8;
-        font-family: "Courier New", monospace;
+    :root {
+        --bg:        #0c0a09;
+        --surface:   #1a1613;
+        --border:    #4d3b2f;
+        --border-lt: #6b5a49;
+        --gold:      #d1b38c;
+        --gold-dim:  #c4b59a;
+        --muted:     #9e8c75;
+        --glow:      #8e7359;
     }
 
-    .scroll {
-        background: radial-gradient(#2b2420, #0c0a09);
-        border: 2px solid #4d3b2f;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+        background: var(--bg);
+        color: #e8d9b8;
+        font-family: "IM Fell English", "Courier New", serif;
+        min-height: 100vh;
+    }
+
+    .page-header {
+        font-family: "Cinzel", serif;
+        font-size: clamp(18px, 5vw, 32px);
+        text-align: center;
+        color: var(--gold);
+        text-shadow: 0 0 10px var(--glow), 0 0 24px rgba(142,115,89,.35);
+        letter-spacing: clamp(1px, 2vw, 6px);
+        padding: clamp(16px, 4vw, 30px) 8px;
+        margin-bottom: 0;
+        line-height: 1.3;
+    }
+
+    .divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0 0 20px;
+        opacity: .5;
+    }
+
+    .action-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .search-row {
+        display: flex;
+        gap: 8px;
         margin-bottom: 20px;
     }
 
-    .header {
-        font-size: 32px;
-        text-align: center;
-        color: #d1b38c;
-        text-shadow: 0 0 6px #8e7359;
-        margin-bottom: 30px;
-        letter-spacing: 3px;
+    .search-row input {
+        flex: 1;
+        min-width: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: #e8d9b8;
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 15px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color .2s;
     }
-
-    .artifact {
-        background: #1a1613;
-        border: 1px solid #564639;
-        padding: 16px;
-        border-radius: 8px;
-    }
+    .search-row input::placeholder { color: var(--muted); }
+    .search-row input:focus { border-color: var(--gold); }
 
     .btn-darkfantasy {
-        background:#3c322a;
-        border:1px solid #6b5a49;
-        color:#e8d9b8;
+        background: #3c322a;
+        border: 1px solid var(--border-lt);
+        color: #e8d9b8;
+        font-family: inherit;
+        white-space: nowrap;
+        transition: background .2s, color .2s;
+        min-height: 40px;
+        padding: 6px 14px;
     }
     .btn-darkfantasy:hover {
-        background:#4e4238;
-        color:white;
+        background: #4e4238;
+        color: #fff;
+        border-color: var(--gold);
+    }
+
+    .btn-danger, .btn-warning {
+        min-height: 40px;
+        padding: 6px 14px;
+    }
+
+    .scroll {
+        background: radial-gradient(ellipse at top left, #2b2420 0%, #0c0a09 80%);
+        border: 1px solid var(--border);
+        padding: clamp(14px, 4vw, 22px);
+        border-radius: 10px;
+        box-shadow: 0 0 28px rgba(0,0,0,.65), inset 0 0 40px rgba(0,0,0,.3);
+        margin-bottom: 18px;
+        transition: border-color .25s, box-shadow .25s;
+    }
+    .scroll:hover {
+        border-color: var(--gold-dim);
+        box-shadow: 0 0 36px rgba(0,0,0,.8), 0 0 12px rgba(209,179,140,.08);
+    }
+
+    .scroll h3 {
+        font-family: "Cinzel", serif;
+        font-size: clamp(15px, 3.5vw, 20px);
+        color: var(--gold);
+        margin-bottom: 6px;
+        word-break: break-word;
+    }
+
+    .artifact-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 20px;
+        margin-bottom: 8px;
+    }
+    .artifact-meta span { font-size: 14px; }
+
+    .desc { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+
+    .card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+    }
+
+    @media (max-width: 480px) {
+        .card-actions .btn,
+        .card-actions form { width: 100%; }
+        .card-actions form .btn { width: 100%; }
+        .action-bar .btn { flex: 1 1 calc(50% - 4px); text-align: center; }
     }
 </style>
 </head>
 
 <body>
 
-<div class="container mt-4" style="max-width:900px;">
+<div class="container py-3" style="max-width:860px;">
 
-    <div class="header">ACADEMY OF SHADOWS — ARTIFACT REGISTRY</div>
+    <h1 class="page-header">ACADEMY OF SHADOWS<br>
+        <small style="font-size:.55em;letter-spacing:4px;color:var(--muted);">ARTIFACT REGISTRY</small>
+    </h1>
+    <hr class="divider">
 
-    <a href="{% url 'shop:create' %}" class="btn btn-darkfantasy mb-3">Add New Artifact</a>
-    <a href="{% url 'shop:logout' %}" class="btn btn-danger mb-3 ms-2">Logout</a>
-    <a href="{% url 'shop:cart' %}" class="btn btn-darkfantasy mb-3 ms-2">View Cart</a>
+    <div class="action-bar">
+        <a href="{% url 'shop:create' %}" class="btn btn-darkfantasy">+ Add Artifact</a>
+        <a href="{% url 'shop:cart' %}"   class="btn btn-darkfantasy">🛒 Cart</a>
+        <a href="{% url 'shop:logout' %}" class="btn btn-danger ms-auto">Logout</a>
+    </div>
 
-<form method="get">
-  <input type="text" name="q" placeholder="Search..." value="{{ q }}">
-  <button type="submit">Search</button>
-</form>
+    <form method="get" class="search-row">
+        <input type="text" name="q" placeholder="Search artifacts…" value="{{ q }}">
+        <button type="submit" class="btn btn-darkfantasy">Search</button>
+    </form>
+
     {% for s in samaan %}
     <div class="scroll">
         <h3>{{ s.name }}</h3>
-        <p style="color:#c4b59a;">Worth: ₹{{ s.price }}</p>
-        <p style="color:#9e8c75;">{{ s.desc|truncatewords:12 }}</p>
-        <p style="color:#9e8c75;">Vendor Name: {{ s.user }}</p>
 
-        <a href="{% url 'shop:read' s.id %}" class="btn btn-darkfantasy mt-2">Inspect</a>
-        <a href="{% url 'shop:update' s.id %}" class="btn btn-warning ms-2 mt-2">Edit</a>
+        <div class="artifact-meta">
+            <span style="color:var(--gold-dim);">₹{{ s.price }}</span>
+            <span style="color:var(--muted);">Vendor: can_be_displayed_here</span>
+        </div>
 
-        <form action="{% url 'shop:add_cart' s.id %}" method="POST">
-            {% csrf_token %}
-            <button class="btn btn-darkfantasy mt-2" type="submit">Add to Cart</button>
-        </form>
-                
-        <!-- <form action="{% url 'shop:delete' s.id %}" method="GET" style="display:inline;">
-            {% csrf_token %}
-            <button class="btn btn-danger ms-2 mt-2">Destroy</button>
-        </form> -->
-        <a href="{% url 'shop:delete' s.id %}" class="btn btn-danger ms-2 mt-2">Destroy</a>
+        <p class="desc">{{ s.desc|truncatewords:12 }}</p>
 
-    </div>
-    {% endfor %}
-</div>
-
-</body>
-</html>
+        <div class="card-actions">
+            <a href="{% url 'shop:read'   s.id %}" class="btn btn-darkfantasy btn-sm">Inspect</a>
+            <a href="{% url 'shop:update' s.id %}" class="

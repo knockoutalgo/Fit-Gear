@@ -58,10 +58,6 @@
     <a href="{% url 'shop:logout' %}" class="btn btn-danger mb-3 ms-2">Exit</a>
 
     <div class="scroll">
-        <h3>{{ s.name }}</h3>
-        <p style="color:#c4b59a;">Worth: ₹{{ s.price }}</p>
-        <p style="color:#9e8c75;">{{ s.desc }}</p>
-
         <a href="{% url 'shop:shoppy' %}" class="btn btn-darkfantasy ms-2 mt-2">Go back</a>
         <a href="{% url 'shop:update' s.id %}" class="btn btn-warning ms-2 mt-2">Edit</a>
 
@@ -69,8 +65,8 @@
             {% csrf_token %}
             <button class="btn btn-danger ms-2 mt-2">Destroy</button>
         </form>
-
-   <h3>{{ s.name }}</h3>
+        <p style="color:#c4b59a;">Worth: ₹{{ s.price }}</p>
+<h3>{{ s.name }}</h3>
 <p>{{ s.desc }}</p>
 
 <!-- ✅ LIKE / DISLIKE COUNTS -->
